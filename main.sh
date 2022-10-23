@@ -46,7 +46,7 @@ while true; do
 	# IPv6
 	if [ "${USE_IPV6}" = "true" ]; then
 		IPV6=$(curl -s -6 ifconfig.io)
-		if [ -z "${IPV4}" ]; then
+		if [ -z "${IPV6}" ]; then
 			echo "Error fetching IPv6 address."
 		else
 			echo "IPv6: ${IPV6}"
