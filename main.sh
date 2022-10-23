@@ -36,14 +36,14 @@ while true; do
 
 	# IPv4
 	if [ "${USE_IPV4}" = "yes" ]; then
-		IPV4=$(curl -4 ifconfig.io)
+		IPV4=$(curl -s -4 ifconfig.io)
 		echo "IPv4: ${IPV4}"
 		URL="${URL}&ip=${IPV4}"
 	fi
 
 	# IPv6
 	if [ "${USE_IPV6}" = "yes" ]; then
-		IPV6=$(curl -6 ifconfig.io)
+		IPV6=$(curl -s -6 ifconfig.io)
 		echo "IPv6: ${IPV6}"
 		URL="${URL}&ipv6=${IPV6}"
 	fi
