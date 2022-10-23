@@ -35,15 +35,23 @@ while true; do
 	# IPv4
 	if [ "${USE_IPV4}" = "true" ]; then
 		IPV4=$(curl -s -4 ifconfig.io)
-		echo "IPv4: ${IPV4}"
-		URL="${URL}&ip=${IPV4}"
+		if [ -z "${IPV4}" ]; then
+			echo "Error fetching IPv4 address."
+		else
+			echo "IPv4: ${IPV4}"
+			URL="${URL}&ip=${IPV4}"
+		fi
 	fi
 
 	# IPv6
 	if [ "${USE_IPV6}" = "true" ]; then
 		IPV6=$(curl -s -6 ifconfig.io)
-		echo "IPv6: ${IPV6}"
-		URL="${URL}&ipv6=${IPV6}"
+		if [ -z "${IPV4}" ]; then
+			echo "Error fetching IPv6 address."
+		else
+			echo "IPv6: ${IPV6}"
+			URL="${URL}&ipv6=${IPV6}"
+		fi
 	fi
 	
 	# Call URL to update DDNS
