@@ -1,3 +1,5 @@
+#!/bin/bash
+
 INTERVAL=${INTERVAL:-"30m"}
 USE_IPV4=${USE_IPV4:-"yes"}
 USE_IPV6=${USE_IPV6:-"no"}
@@ -22,15 +24,18 @@ while true; do
 
 	URL="https://www.duckdns.org/update?domains=${DOMAINS}&token=${TOKEN}"
 
+	USE_IPV4=$(echo "${USE_IPV4}" | awk '{print tolower($0)}')
+	USE_IPV6=$(echo "${USE_IPV6}" | awk '{print tolower($0)}')
+
 	# IPv4
-	if [ "${USE_IPV4,,}" = "yes" ]; then
+	if [ "${USE_IPV4}" = "yes" ]; then
 		IPV4=$(curl -4 ifconfig.io)
 		echo "IPv4: ${IPV4}"
 		URL="${URL}&ip=${IPV4}"
 	fi
 
 	# IPv6
-	if [ "${USE_IPV6,,}" = "yes" ]; then
+	if [ "${USE_IPV6}" = "yes" ]; then
 		IPV6=$(curl -6 ifconfig.io)
 		echo "IPv6: ${IPV6}"
 		URL="${URL}&ipv6=${IPV6}"
